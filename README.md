@@ -4,7 +4,6 @@ This is a Spotify clone application built using **JavaScript**, **CSS**, and **H
 
 ## Features
 
-- User authentication
 - Music playback
 - Playlist management
 - Responsive design
