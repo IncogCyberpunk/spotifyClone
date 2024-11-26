@@ -1,0 +1,254 @@
+
+*{
+    font-family: "Gotham"
+}
+
+body{
+    background-color: black;
+    color: white;
+}
+
+
+main{
+    display: flex;
+    gap: 0 5px;
+}
+
+a{
+    font-weight: 600;
+}
+
+p{
+    text-overflow: ellipsis;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 12px; /* Adjust the width as needed */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #333; /* Color of the thumb (drag handle) */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: rgb(18,18,18); /* Color of the track (the area where the thumb moves) */
+  }
+  
+
+button{
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1300px) {
+   .leftSection{
+    position: absolute;
+    left: -110%;
+    transition: left 1s;
+    z-index: 2;
+    background-color: black;
+    width: fit-content;
+   }
+    
+   #links{
+    gap: 0 10px;
+   }
+
+   #companyInfo{
+    gap: 0 50px;
+   }
+   .rightSection{
+    width: 100vw;
+   }
+
+   #closeIcon{
+    display: block;
+   }
+   
+   #header{
+    width: 96vw;
+   }
+
+   #playBar{
+    width: 95vw;
+    right: 10px;
+   }
+
+   #seekBar{
+    left: 9vw;
+   }
+   #hamburgerIcon{
+    display: block;
+    width: 35px;
+   }
+
+   #nav img:not(:first-child){
+    display: none;
+   }
+   
+   #copyrightText{
+    text-align: center;
+    position: relative;
+    right: 30px;
+}
+
+
+}
+
+
+@media screen and (width < 725px ) {
+    #entry{
+        position: relative;
+        right: 30px;
+    }
+
+    #companyInfo a{
+        font-size: 12px;
+    }
+    #companyInfo{
+        gap: 0 20px;
+    }
+    #links{
+        gap: 0 5px;
+    }
+
+    #playBar{
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        height: auto;
+        background-color: rgb(29,38,38);
+        padding: 20px 0;
+        border-radius: 12px;
+    }
+
+    #songInfo{
+        font-size: 24px;
+        font-weight: bold;
+        position: relative;
+        left: 0;
+        bottom: 0;    
+        letter-spacing: 1px;
+    }
+
+    #songTime{
+        position: relative;
+        right: 0;
+        left: 0;
+        font-size: 18px;
+    }
+
+    #seekBar{
+       position: initial;
+    }
+
+    #playBar button{
+        background-color: rgb(29,38,38);
+    }
+    
+    #circle{
+        position: relative;
+    }
+    
+    #copyrightText{
+        margin-bottom: 200px;
+    }
+
+    #songButtons{
+        margin: 10px 0;
+    }
+
+    #playBar div:nth-child(3){
+        justify-content: center;
+        position: initial;
+    }
+}
+
+@media screen and (width < 595px ) and (width > 460px)  {
+    #companyInfo{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #socials,#links{
+        margin: 0 auto;
+    }
+
+}
+
+@media screen and (max-width: 460px) {
+    #links, #companyInfo{
+        flex-direction: column;
+        margin: 0 auto;
+    }
+    #links  h3{
+        font-size: 36px;
+    }
+    #links ul a {
+        font-size: 30px;
+    }
+
+    #socials{
+        margin: 10px auto;
+    }
+
+    #cards{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    
+    
+}
+
+
+/* MEDIA QUERIES FOR THE HEADER 
+
+
+@media screen and (min-width: 1330px ) and (max-width: 1410px) {
+    #entry{
+        top: 0;
+        left: 80px;
+    }
+}
+
+@media screen and (min-width: 1411px) {
+    #entry{
+        position: relative;
+        right: 30px;
+    }
+}
+
+@media screen and (min-width: 1468px) {
+    #entry{
+        position: relative;
+        right: 30px;
+    }
+}
+
+@media screen and (min-width: 1528px) {
+    #entry{
+        position: relative;
+        right: 30px;
+    }
+}
+
+@media screen and (min-width: 1602px) {
+    #entry{
+        position: relative;
+        right: 30px;
+    }
+}
+
+@media screen and (min-width: 1810px ) and  (max-width: 1920px ) {
+
+    #entry{
+        position: relative;
+        right: 40px;
+    }
+} 
+
+*

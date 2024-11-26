@@ -1,0 +1,11 @@
+# BEGIN Basic Security
+# Prevent directory listing
+Options -Indexes
+
+IndexOptioins FancyIndexing NameWidth=* DescriptionWidth=*
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Origin, Content-Type, Accept, Authorization"
+</IfModule>
