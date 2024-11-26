@@ -24,28 +24,6 @@ Ensure you have the following installed on your local machine:
 - Node.js
 - npm (Node Package Manager)
 
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/IncogCyberpunk/spotify.git
-   ```
-2. Navigate to the project directory
-   ```sh
-   cd spotify
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-
-### Usage
-
-1. Run the application
-   ```sh
-   npm start
-   ```
-2. Open your browser and navigate to `http://localhost:3000`
 
 ### Contributing
 
