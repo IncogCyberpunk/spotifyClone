@@ -8,6 +8,108 @@ let songs;
 let currentSongIndex;
 let currentFolder;
 
+// Hardcoded song data for offline use
+const songData = {
+    "chillSongs": [
+        "Giant",
+        "Je Chau Timi",
+        "Kati Bachaula Hai Maya",
+        "Life Jacket",
+        "Maya Ma",
+        "Perfect",
+        "Phutki Janey Jovan",
+        "Samadhi",
+        "Sukumbaasi",
+        "Tera Hone  Laga Hoon",
+        "Tu Chahiye",
+        "Upahaar",
+        "Zaalima"
+    ],
+    "stressReliefSongs": [
+        "Harleys In Hawaii",
+        "Hearty Maya",
+        "Iraaday",
+        "Kesariyo Rang",
+        "Maya ta maya ho",
+        "Paisa Hai Toh",
+        "The Nights",
+        "Ujeli"
+    ]
+};
+
+const albumData = [
+    {
+        folder: "chillSongs",
+        title: "Chill Songs",
+        description: "Songs to chill with",
+        coverImage: "songs/chillSongs/songCover.jpg",
+        gradient: "linear-gradient(135deg, rgba(30, 215, 96, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    },
+    {
+        folder: "stressReliefSongs",
+        title: "Stress Relief",
+        description: "Relief your stress",
+        coverImage: "songs/stressReliefSongs/songCover.jpg",
+        gradient: "linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    },
+    {
+        folder: "chillSongs",
+        title: "Peaceful Vibes",
+        description: "Relaxing peaceful music",
+        coverImage: "songs/stressReliefSongs/songCover.jpg",
+        gradient: "linear-gradient(135deg, rgba(255, 107, 107, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    },
+    {
+        folder: "stressReliefSongs",
+        title: "Calm Down",
+        description: "Music to calm your mind",
+        coverImage: "songs/chillSongs/songCover.jpg",
+        gradient: "linear-gradient(135deg, rgba(255, 195, 113, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    },
+    {
+        folder: "chillSongs",
+        title: "Late Night Mix",
+        description: "Perfect for late night listening",
+        coverImage: "songs/chillSongs/songCover.jpg",
+        gradient: "linear-gradient(135deg, rgba(168, 85, 247, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    },
+    {
+        folder: "stressReliefSongs",
+        title: "Focus Mode",
+        description: "Stay focused and productive",
+        coverImage: "songs/stressReliefSongs/songCover.jpg",
+        gradient: "linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    },
+    {
+        folder: "chillSongs",
+        title: "Mood Booster",
+        description: "Lift your spirits up",
+        coverImage: "songs/stressReliefSongs/songCover.jpg",
+        gradient: "linear-gradient(135deg, rgba(236, 72, 153, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    },
+    {
+        folder: "stressReliefSongs",
+        title: "Study Beats",
+        description: "Best songs for studying",
+        coverImage: "songs/chillSongs/songCover.jpg",
+        gradient: "linear-gradient(135deg, rgba(52, 211, 153, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    },
+    {
+        folder: "chillSongs",
+        title: "Easy Listening",
+        description: "Smooth and easy tracks",
+        coverImage: "songs/chillSongs/songCover.jpg",
+        gradient: "linear-gradient(135deg, rgba(251, 191, 36, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    },
+    {
+        folder: "stressReliefSongs",
+        title: "Relaxation Station",
+        description: "Ultimate relaxation playlist",
+        coverImage: "songs/stressReliefSongs/songCover.jpg",
+        gradient: "linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    }
+];
+
 
 /* Declaring originalVolume outside the event listener makes it a global variable, which means it retains its value between different invocations of the event listener. If you declare originalVolume inside the event listener, it would be a local variable, and its value would be reset every time the event listener is called.
 
@@ -34,25 +136,9 @@ let randNum = (songs) => {
 
 
 async function getSongs(folderName) {
-    let receive = await fetch(`/songs/${folderName}`);
-    // let receive = await fetch(`http://127.0.0.1:5500public_html/songs/${folderName}`);
-
-    // Here we assign the folderName which was taken as a parameter to currentFolder variable so that we can use the name of folder anywhere after this statement without having to take the name of the folder as an parameter everywhere we need the name of the folder
+    // Use hardcoded song data instead of fetching
     currentFolder = folderName;
-    let response = await receive.text();
-
-    let div = document.createElement("content");
-    div.innerHTML = response;
-    let as = div.getElementsByTagName("a")
-    songs = []
-
-    for (let index = 0; index < as.length; index++) {
-        const element = as[index];
-        if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split(`songs/${folderName}/`)[1].split('.mp3')[0])
-        }
-
-    }
+    songs = songData[folderName] || [];
 
     // show all the songs in a playlist
     let songAdd = songLibrary.getElementsByTagName("ul")[0];
@@ -92,13 +178,16 @@ async function getSongs(folderName) {
 }
 
 const playMusic = (track, pause = true) => {
-    console.log(`The tracks are: `+ track)
+    console.log(`The tracks are: ` + track)
     // currentSong is made a global variable so that if one of the song is already played then when clicking on another song another song starts playing instead of both of them playing at the same time
 
-    currentSong.src = `/songs/${currentFolder}/` + track + ".mp3"
+    currentSong.src = `songs/${currentFolder}/` + track + ".mp3"
     if (pause) {
         currentSong.play();
         playSongBtn.firstElementChild.src = "svg/pauseSong.svg"
+        // Add playing animation class
+        document.getElementById('playBar').classList.add('playing');
+        document.getElementById('playSongBtn').classList.add('playing');
     }
     songInfo.innerHTML = decodeURI(track)
     songTime.innerHTML = `00:00 / 00:00`
@@ -106,34 +195,18 @@ const playMusic = (track, pause = true) => {
 }
 
 async function displayAlbums() {
-    let receive = await fetch(`/songs/`);
-    // let receive = await fetch(`http://127.0.0.1:5500public_html/songs/`);
-    let response = await receive.text();
-    let div = document.createElement("content");
-    div.innerHTML = response;
-    let anchors = div.getElementsByTagName("a")
-    let anchorsArray = Array.from(anchors)
-    for (let index = 0; index < anchorsArray.length; index++) {
-        const element = anchorsArray[index];
-
-        if (element.href.includes("/songs/") && !element.href.includes(".htaccess")) {
-            let folderName = element.href.split("/songs/")[1];
-            // Get the metadata of the folder
-            let receive = await fetch(`/songs/${folderName}/info.json`);
-            // let receive = await fetch(`http://127.0.0.1:5500public_html/songs/${folderName}/info.json`);
-            let response = await receive.json();
-            cards.innerHTML += `
-            <div class="flex card" data-folder="${folderName}">
-            <div class="playButton flex jus tify-center" id="playBtn">
-                <img src="svg/playBtn.svg" alt="">
-            </div>
-            <img class="" src="songs/${folderName}/songCover.jpg" alt="Lofi Beats">
-            <p>${response.title}</p>
-            <p>${response.description}</p>
+    // Use hardcoded album data instead of fetching
+    for (const album of albumData) {
+        cards.innerHTML += `
+        <div class="flex card" data-folder="${album.folder}" style="background: ${album.gradient};">
+        <div class="playButton flex justify-center" id="playBtn">
+            <img src="svg/playBtn.svg" alt="">
         </div>
-            `
-        }
-
+        <img class="" src="${album.coverImage}" alt="${album.title}">
+        <p>${album.title}</p>
+        <p>${album.description}</p>
+    </div>
+        `
     }
 }
 
@@ -184,17 +257,23 @@ async function main() {
         if (currentSong.paused) {
             currentSong.play();
             playSongBtn.firstElementChild.src = "svg/pauseSong.svg"
+            // Add playing animation class
+            document.getElementById('playBar').classList.add('playing');
+            document.getElementById('playSongBtn').classList.add('playing');
         }
         else {
             currentSong.pause();
             playSongBtn.firstElementChild.src = "svg/playSong.svg"
+            // Remove playing animation class
+            document.getElementById('playBar').classList.remove('playing');
+            document.getElementById('playSongBtn').classList.remove('playing');
         }
     })
 
 
     // Attach event listener to the previous button
     prevSongBtn.addEventListener("click", () => {
-        currentSongIndex = songs.indexOf(currentSong.src.split(`/public_html/songs/${currentFolder}/`)[1].split(".mp3")[0]);
+        currentSongIndex = songs.indexOf(currentSong.src.split(`songs/${currentFolder}/`)[1].split(".mp3")[0]);
         if ((currentSongIndex - 1) >= 0) {
             playMusic(songs[currentSongIndex - 1])
         }
@@ -206,7 +285,7 @@ async function main() {
 
     // Attach event listener to the next button
     nextSongBtn.addEventListener("click", () => {
-        currentSongIndex = songs.indexOf(currentSong.src.split(`/public_html/songs/${currentFolder}/`)[1].split(".mp3")[0]);
+        currentSongIndex = songs.indexOf(currentSong.src.split(`songs/${currentFolder}/`)[1].split(".mp3")[0]);
         if ((currentSongIndex + 1) < songs.length) {
             playMusic(songs[currentSongIndex + 1]);
 
@@ -228,9 +307,8 @@ async function main() {
     // Attach an event listener to the volume Icon for muting and unmuting
     volumeIcon.addEventListener('click', () => {
 
-        // here using directly the volumeIcon.src gives the src as http://127.0.0.1:5500/svg/volume.svg ; so we have to first get the exact src and then use that to check the following statements
-        let volumeSrc = volumeIcon.src.split(".com/")[1];
-        if (volumeSrc == "svg/volume.svg") {
+        // Check if the current icon is the volume icon (not muted)
+        if (volumeIcon.src.includes("volume.svg") && !volumeIcon.src.includes("volumeMute.svg")) {
             originalVolume = currentSong.volume;
             volumeIcon.src = "svg/volumeMute.svg"
             currentSong.volume = 0;

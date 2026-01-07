@@ -6,28 +6,47 @@
 }
 
 .rightSection {
-    background-color: rgb(18, 18, 18);
-    width: 100vw;
+    background: linear-gradient(180deg, rgba(30, 215, 96, 0.1) 0%, rgb(18, 18, 18) 100%);
+    width: 100%;
+    max-width: 100%;
     border-radius: 9px;
     position: relative;
-    padding-top: 40px;
+    padding: 80px 8px 0 8px;
+    overflow-x: hidden;
 }
 
 #header {
     /* here width 100% is not working because position fixed takes the element out of the browser window and here only top is specified so it goes to the top of the page but left/right is not specified so it places itself in the browser window from where it actually was before it was fixed, so 100% of the width of it's parent when applied to it stretches it beyond the screen. */
-    width: 73vw;
-    height: 50px;
-    position: fixed;
+    width: calc(100% - 48px);
+    height: 64px;
+    position: absolute;
     z-index: 11;
     top: 8px;
-    background-color: black;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    background: linear-gradient(90deg, rgba(30, 215, 96, 0.95) 0%, rgba(29, 185, 84, 0.95) 100%);
+    backdrop-filter: blur(10px);
     justify-content: space-between;
-    padding: 5px;
+    padding: 8px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(30, 215, 96, 0.3);
 }
 
 #nav {
-    padding-left: 30px;
+    padding-left: 12px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#nav img {
+    transition: transform 0.2s ease;
+}
+
+#nav img:hover {
+    transform: scale(1.1);
 }
 
 
@@ -37,28 +56,37 @@
 
 
 #signUp {
-    background-color: inherit;
-    color: rgb(160, 160, 160);
-    padding: 20px 25px;
+    background-color: transparent;
+    color: white;
+    padding: 12px 28px;
     cursor: pointer;
     border: none;
     font-weight: 700;
-    font-size: 17px;
-    transition: font-size 0.3s ease-in-out;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border-radius: 24px;
 }
 
 #signUp:hover {
-    font-size: 19px;
-    color: white;
-    
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
 }
 
 #logIn {
-    border: 1px solid white;
+    border: 2px solid white;
     font-weight: 700;
     font-size: 15px;
-    padding: 11px 25px;
-    border-radius: 27px;
+    padding: 12px 32px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #1db954;
+    transition: all 0.3s ease;
+}
+
+#logIn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.4);
+    background: white;
 }
 
 #playlistSection {
@@ -103,6 +131,8 @@
     padding: 0;
     padding-left: 20px;
     gap: 30px;
+    flex-wrap: wrap;
+    max-width: 100%;
 }
 
 
@@ -111,31 +141,39 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    background-color: rgb(21, 21, 21);
+    background: linear-gradient(145deg, rgba(30, 215, 96, 0.15) 0%, rgb(21, 21, 21) 100%);
     cursor: pointer;
-    border-radius: 7px;
+    border-radius: 12px;
     width: 180px;
     position: relative;
-    border: 1px solid rgb(50, 50, 50);
+    border: 1px solid rgba(30, 215, 96, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
 }
 
-#cards> div:hover{
+#cards>div:hover {
     --a:1;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(30, 215, 96, 0.3);
 }
 
 #playBtn {
     position: absolute;
     top: 100px;
     right: 28px;
-    background-color: #1ed760;
+    background: linear-gradient(135deg, #1ed760 0%, #1db954 100%);
     border-radius: 25px;
     width: 40px;
     height: 40px;
     opacity: var(--a);
+    box-shadow: 0 4px 15px rgba(30, 215, 96, 0.6);
+    transition: all 0.3s;
 }
 
 #playBtn:hover{
     opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(30, 215, 96, 0.8);
 }
 
 #playBtn img {
@@ -175,7 +213,8 @@
 /* CSS OF THE LINKS STUFF */
 #companyInfo {
     gap: 0 11vw;
-    margin-bottom: 40px;
+    margin-bottom: 150px;
+    padding-bottom: 20px;
 }
 
 #links {
@@ -214,34 +253,93 @@
 
 .rightSection>p {
     color: rgb(158, 158, 158);
-    margin: 40px 0 100px 45px;
+    margin: 40px 0 140px 45px;
 }
 
 /*  PLAYBAR/SEEKBAR  */
 
+@keyframes playbarGlow {
+    0%, 100% {
+        box-shadow: 0 -8px 32px rgba(30, 215, 96, 0.25), 0 0 50px rgba(102, 126, 234, 0.15);
+        border-color: rgba(30, 215, 96, 0.4);
+    }
+    50% {
+        box-shadow: 0 -12px 40px rgba(30, 215, 96, 0.45), 0 0 70px rgba(102, 126, 234, 0.35), 0 0 100px rgba(30, 215, 96, 0.2);
+        border-color: rgba(30, 215, 96, 0.7);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 25px rgba(30, 215, 96, 0.6);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 35px rgba(30, 215, 96, 0.9), 0 0 50px rgba(30, 215, 96, 0.5);
+    }
+}
+
 #playBar {
-    width: 72%;
-    height: 70px;
+    width: 90%;
+    max-width: 1400px;
+    height: 90px;
     position: fixed;
-    bottom: 20px;
-    right: 22px;
-    background-color: black;
-    gap: 10px;
-    border-radius: 8px;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, rgba(30, 215, 96, 0.15) 0%, rgba(0, 0, 0, 0.98) 30%, rgba(102, 126, 234, 0.15) 100%);
+    backdrop-filter: blur(20px);
+    gap: 20px;
+    border-radius: 16px;
     justify-content: space-between;
     z-index: 10;
+    border: 2px solid rgba(30, 215, 96, 0.4);
+    box-shadow: 0 -8px 32px rgba(30, 215, 96, 0.25), 0 0 50px rgba(102, 126, 234, 0.15);
+    padding: 0 20px;
+    transition: all 0.3s ease;
+}
+
+#playBar.playing {
+    animation: playbarGlow 2s ease-in-out infinite;
 }
 
 #playSongBtn {
     cursor: pointer;
-    border-radius: 51%;
-    border: 1px solid white;
+    border-radius: 50%;
+    border: 2px solid #1ed760;
+    background: linear-gradient(135deg, #1ed760 0%, #1db954 100%);
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+#playSongBtn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 25px rgba(30, 215, 96, 0.8);
+}
+
+#playSongBtn.playing {
+    animation: pulseGlow 1.5s ease-in-out infinite;
+}
+
+#playSongBtn img {
+    filter: brightness(0) invert(1);
 }
 
 #playBar button {
     border: none;
     outline: none;
-    background-color: black;
+    background: transparent;
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+#playBar button:not(#playSongBtn):hover {
+    transform: scale(1.2);
+}
+
+#playBar button:not(#playSongBtn):hover img {
+    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(30, 215, 96, 0.8));
 }
 
 
@@ -253,15 +351,27 @@
     bottom: 5px;
 }
 
+#songButtons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
 #seekBar {
     cursor: pointer;
-    height: 5px;
-    width: 80%;
-    border-radius: 8px;
-    background-color: white;
+    height: 6px;
+    width: 85%;
+    border-radius: 12px;
+    background: linear-gradient(90deg, rgba(30, 215, 96, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%);
     position: absolute;
-    bottom: 8px;
-    left: 7vw;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: height 0.2s ease;
+}
+
+#seekBar:hover {
+    height: 8px;
 }
 
 #circle {
