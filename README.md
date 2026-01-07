@@ -4,7 +4,6 @@ This is a Spotify clone application built using **JavaScript**, **CSS**, and **H
 
 ## Features
 
-- User authentication
 - Music playback
 - Playlist management
 - Responsive design
@@ -25,28 +24,6 @@ Ensure you have the following installed on your local machine:
 - Node.js
 - npm (Node Package Manager)
 
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/IncogCyberpunk/spotify.git
-   ```
-2. Navigate to the project directory
-   ```sh
-   cd spotify
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-
-### Usage
-
-1. Run the application
-   ```sh
-   npm start
-   ```
-2. Open your browser and navigate to `http://localhost:3000`
 
 ### Contributing
 
@@ -58,9 +35,6 @@ Contributions are what make the open-source community such an amazing place to l
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
